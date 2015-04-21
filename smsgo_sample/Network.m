@@ -12,23 +12,18 @@
 static Network *_network = nil;
 
 //Const
-NSString *const kSendSMSBaseURLDev = @"http://smscenter.smsgo.com.tw/sms_gw/sendsms.aspx?rtype=JSON";
 NSString *const kSendSMSBaseURL = @"http://www.smsgo.com.tw/sms_gw/sendsms.aspx?rtype=JSON";
 NSString *const kSendSMSBaseURLSSL = @"https://ssl.smsgo.com.tw/sms_gw/sendsms.aspx?rtype=JSON";
 
-NSString *const kQuerySingleSMSSentStatusDev = @"http://smscenter.smsgo.com.tw/sms_gw/query.asp?rtype=JSON";
 NSString *const kQuerySingleSMSSentStatus = @"http://www.smsgo.com.tw/sms_gw/query.asp?rtype=JSON";
 NSString *const kQuerySingleSMSSentStatusSSL = @"https://ssl.smsgo.com.tw/sms_gw/query.asp?rtype=JSON";
 
-NSString *const kQueryMultiSMSSentStatusDev = @"http://smscenter.smsgo.com.tw/sms_gw/queryBulk.asp?rtype=JSON";
 NSString *const kQueryMultiSMSSentStatus = @"http://www.smsgo.com.tw/sms_gw/queryBulk.asp?rtype=JSON";
 NSString *const kQueryMultiSMSSentStatusSSL = @"https://ssl.smsgo.com.tw/sms_gw/queryBulk.asp?rtype=JSON";
 
-NSString *const kQueryPointDev = @"http://smscenter.smsgo.com.tw/sms_gw/query_point.asp?rtype=JSON";
 NSString *const kQueryPoint = @"http://www.smsgo.com.tw/sms_gw/query_point.asp?rtype=JSON";
 NSString *const kQueryPointSSL = @"https://ssl.smsgo.com.tw/sms_gw/query_point.asp?rtype=JSON";
 
-NSString *const kCancelScheduledSMSDev = @"http://smscenter.smsgo.com.tw/sms_gw/sendsms_cancel.asp?rtype=JSON";
 NSString *const kCancelScheduledSMS = @"http://www.smsgo.com.tw/sms_gw/sendsms_cancel.asp?rtype=JSON";
 NSString *const kCancelScheduledSMSSSL = @"https://ssl.smsgo.com.tw/sms_gw/sendsms_cancel.asp?rtype=JSON";
 
