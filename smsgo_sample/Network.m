@@ -158,17 +158,13 @@ NSString *const kCancelScheduledSMSSSL = @"https://ssl.smsgo.com.tw/sms_gw/sends
               NSDictionary* responseDict = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:&errorJson];
               id statusCode = @"";
               statusCode = [NSString stringWithFormat:@"%@", [[[[responseDict objectForKey:@"results"] objectForKey:@"result"] firstObject] objectForKey:@"statuscode"]];
-              NSLog(@"%@", statusCode);
-              statusCode = [statusCode isEqualToString:@"(null)"] ? @"-1" : statusCode;
               
-              if ([statusCode isEqualToString:@"0"]) {
+              if (![statusCode isEqualToString:@"0"]) {
                   NSLog(@"%@", responseDict);
                   NSError *err = [[NSError alloc] initWithDomain:[NSString stringWithFormat:@"%@%@", @"Server Return StatusCode,", statusCode]
                                                             code:[statusCode intValue]
-                                                        userInfo:@{NSLocalizedDescriptionKey : [[[[responseDict objectForKey:@"results"] objectForKey:@"result"] firstObject] objectForKey:@"statusstr"]}];
+                                                        userInfo:@{NSLocalizedDescriptionKey : [[[[responseDict objectForKey:@"results"] objectForKey:@"result"] firstObject] objectForKey:@"point"]}];
                   completion(NO, responseDict, err);
-                  
-                  
               }else{
                   completion(YES, responseDict, nil);
               }
