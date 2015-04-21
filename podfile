@@ -1,0 +1,5 @@
+platform :ios, '7.1'
+
+pod 'AFNetworking', '~> 2.5.2'
+pod 'KBContactsSelection'
+pod 'MBProgressHUD', '~> 0.9.1'

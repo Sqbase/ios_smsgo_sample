@@ -1,0 +1,41 @@
+PODS:
+  - AFNetworking (2.5.2):
+    - AFNetworking/NSURLConnection (= 2.5.2)
+    - AFNetworking/NSURLSession (= 2.5.2)
+    - AFNetworking/Reachability (= 2.5.2)
+    - AFNetworking/Security (= 2.5.2)
+    - AFNetworking/Serialization (= 2.5.2)
+    - AFNetworking/UIKit (= 2.5.2)
+  - AFNetworking/NSURLConnection (2.5.2):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/NSURLSession (2.5.2):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (2.5.2)
+  - AFNetworking/Security (2.5.2)
+  - AFNetworking/Serialization (2.5.2)
+  - AFNetworking/UIKit (2.5.2):
+    - AFNetworking/NSURLConnection
+    - AFNetworking/NSURLSession
+  - APAddressBook (0.1.5):
+    - APAddressBook/Core (= 0.1.5)
+  - APAddressBook/Core (0.1.5)
+  - KBContactsSelection (1.2.3):
+    - APAddressBook (~> 0.1)
+  - MBProgressHUD (0.9.1)
+
+DEPENDENCIES:
+  - AFNetworking (~> 2.5.2)
+  - KBContactsSelection
+  - MBProgressHUD (~> 0.9.1)
+
+SPEC CHECKSUMS:
+  AFNetworking: fefbce9660acb17f48ae0011292d4da0f457bf36
+  APAddressBook: c72fec93464d57f39966ce28c107c10253fa7d39
+  KBContactsSelection: 575a3abea841a05732157a84f77f7b0556e41e7a
+  MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
+
+COCOAPODS: 0.36.3
