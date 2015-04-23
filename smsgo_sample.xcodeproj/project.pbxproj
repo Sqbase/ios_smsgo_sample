@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		6136CE271AE100620003419F /* HistoryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6136CE261AE100620003419F /* HistoryVC.m */; };
 		6136CE291AE639610003419F /* podfile in Resources */ = {isa = PBXBuildFile; fileRef = 6136CE281AE639610003419F /* podfile */; };
+		6136CE2D1AE72F710003419F /* MainPageMV.m in Sources */ = {isa = PBXBuildFile; fileRef = 6136CE2C1AE72F710003419F /* MainPageMV.m */; };
+		6136CE301AE72F850003419F /* HistoryMV.m in Sources */ = {isa = PBXBuildFile; fileRef = 6136CE2F1AE72F850003419F /* HistoryMV.m */; };
 		61A979E31ADE162800362DAC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 61A979E21ADE162800362DAC /* main.m */; };
 		61A979E61ADE162800362DAC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 61A979E51ADE162800362DAC /* AppDelegate.m */; };
 		61A979E91ADE162800362DAC /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 61A979E81ADE162800362DAC /* ViewController.m */; };
@@ -17,7 +19,6 @@
 		61A979F11ADE162800362DAC /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 61A979EF1ADE162800362DAC /* LaunchScreen.xib */; };
 		61A979FD1ADE162800362DAC /* smsgo_sampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 61A979FC1ADE162800362DAC /* smsgo_sampleTests.m */; };
 		61A97A091ADE183E00362DAC /* Network.m in Sources */ = {isa = PBXBuildFile; fileRef = 61A97A081ADE183E00362DAC /* Network.m */; };
-		61A97A261AE0B96800362DAC /* SentList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 61A97A251AE0B96800362DAC /* SentList.plist */; };
 		61A97A291AE0B98600362DAC /* LocalModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 61A97A281AE0B98600362DAC /* LocalModel.m */; };
 		C08576993E422B8C22A38256 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E36E3F6870F3A5F6434BC1DC /* libPods.a */; };
 /* End PBXBuildFile section */
@@ -37,6 +38,10 @@
 		6136CE251AE100620003419F /* HistoryVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryVC.h; sourceTree = "<group>"; };
 		6136CE261AE100620003419F /* HistoryVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryVC.m; sourceTree = "<group>"; };
 		6136CE281AE639610003419F /* podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		6136CE2B1AE72F710003419F /* MainPageMV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainPageMV.h; sourceTree = "<group>"; };
+		6136CE2C1AE72F710003419F /* MainPageMV.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainPageMV.m; sourceTree = "<group>"; };
+		6136CE2E1AE72F850003419F /* HistoryMV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryMV.h; sourceTree = "<group>"; };
+		6136CE2F1AE72F850003419F /* HistoryMV.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryMV.m; sourceTree = "<group>"; };
 		61A979DD1ADE162800362DAC /* smsgo_sample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = smsgo_sample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		61A979E11ADE162800362DAC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		61A979E21ADE162800362DAC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -52,7 +57,6 @@
 		61A979FC1ADE162800362DAC /* smsgo_sampleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = smsgo_sampleTests.m; sourceTree = "<group>"; };
 		61A97A071ADE183E00362DAC /* Network.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Network.h; sourceTree = "<group>"; };
 		61A97A081ADE183E00362DAC /* Network.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Network.m; sourceTree = "<group>"; };
-		61A97A251AE0B96800362DAC /* SentList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SentList.plist; sourceTree = "<group>"; };
 		61A97A271AE0B98600362DAC /* LocalModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalModel.h; sourceTree = "<group>"; };
 		61A97A281AE0B98600362DAC /* LocalModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalModel.m; sourceTree = "<group>"; };
 		8FB6AC514B1884D2BDB8B6D6 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -95,6 +99,17 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		6136CE2A1AE72F3A0003419F /* ModelView */ = {
+			isa = PBXGroup;
+			children = (
+				6136CE2B1AE72F710003419F /* MainPageMV.h */,
+				6136CE2C1AE72F710003419F /* MainPageMV.m */,
+				6136CE2E1AE72F850003419F /* HistoryMV.h */,
+				6136CE2F1AE72F850003419F /* HistoryMV.m */,
+			);
+			name = ModelView;
+			sourceTree = "<group>";
+		};
 		61A979D41ADE162800362DAC = {
 			isa = PBXGroup;
 			children = (
@@ -119,6 +134,7 @@
 		61A979DF1ADE162800362DAC /* smsgo_sample */ = {
 			isa = PBXGroup;
 			children = (
+				6136CE2A1AE72F3A0003419F /* ModelView */,
 				61A97A061ADE180F00362DAC /* Model */,
 				61A979E41ADE162800362DAC /* AppDelegate.h */,
 				61A979E51ADE162800362DAC /* AppDelegate.m */,
@@ -173,7 +189,6 @@
 		61A97A241AE0B94400362DAC /* Local */ = {
 			isa = PBXGroup;
 			children = (
-				61A97A251AE0B96800362DAC /* SentList.plist */,
 				61A97A271AE0B98600362DAC /* LocalModel.h */,
 				61A97A281AE0B98600362DAC /* LocalModel.m */,
 			);
@@ -266,7 +281,6 @@
 				61A979EC1ADE162800362DAC /* Main.storyboard in Resources */,
 				61A979F11ADE162800362DAC /* LaunchScreen.xib in Resources */,
 				6136CE291AE639610003419F /* podfile in Resources */,
-				61A97A261AE0B96800362DAC /* SentList.plist in Resources */,
 				61A979EE1ADE162800362DAC /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -321,7 +335,9 @@
 				61A979E91ADE162800362DAC /* ViewController.m in Sources */,
 				61A979E61ADE162800362DAC /* AppDelegate.m in Sources */,
 				61A97A091ADE183E00362DAC /* Network.m in Sources */,
+				6136CE301AE72F850003419F /* HistoryMV.m in Sources */,
 				6136CE271AE100620003419F /* HistoryVC.m in Sources */,
+				6136CE2D1AE72F710003419F /* MainPageMV.m in Sources */,
 				61A97A291AE0B98600362DAC /* LocalModel.m in Sources */,
 				61A979E31ADE162800362DAC /* main.m in Sources */,
 			);

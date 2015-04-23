@@ -13,7 +13,7 @@
 @end
 
 @implementation ViewController
-
+#pragma mark - SYSTEM method
 - (void) viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     //[[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -21,30 +21,67 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     if (!numberArray) {
         numberArray = [NSMutableArray new];
     }
     
-    UITapGestureRecognizer *singleFingerTap =
-    [[UITapGestureRecognizer alloc] initWithTarget:self
-                                            action:@selector(handleSingleTap:)];
+    //Touch self.view disable Keyboard
+    UITapGestureRecognizer *singleFingerTap =[[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                                     action:@selector(handleSingleTap:)];
     [self.view addGestureRecognizer:singleFingerTap];
     
-    // Do any additional setup after loading the view, typically from a nib
-}
-
-//The event handling method
-- (void)handleSingleTap:(UITapGestureRecognizer *)recognizer {
-    [_numberField resignFirstResponder];
-    [_userNameField resignFirstResponder];
-    [_passwordField resignFirstResponder];
-    [_numberTextView resignFirstResponder];
-    [_contentTextView resignFirstResponder];
+    //ViewModel init
+    _mainPageMV = [MainPageMV sharedInstance];
+    
+    [_mainPageMV addObserver:self
+                 forKeyPath:@"pointString"
+                    options:NSKeyValueObservingOptionNew
+                    context:nil];
+    
+    [_mainPageMV addObserver:self
+                  forKeyPath:@"isSendSuccess"
+                     options:NSKeyValueObservingOptionNew
+                     context:nil];
+    
     
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+#pragma mark KVO Method
+-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
+    
+    if([keyPath isEqualToString:@"pointString"]){
+        [self showAlertWithSuccess:YES Content:[NSString stringWithFormat:@"Left Point : %@", [change objectForKey:@"new"]]];
+        
+    }else if ([keyPath isEqualToString:@"isSendSuccess"]){
+        if ([[change objectForKey:@"new"] integerValue] == 1) {
+            [self showAlertWithSuccess:YES Content:@"Message Sent to Server Successfully."];
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        }
+        
+    }
+}
+
+#pragma mark - Custom Utils Method
+- (BOOL)checkUserAndPasswd{
+    if (_userNameField.text.length == 0 || _passwordField.text.length == 0) {
+        [self showAlertWithSuccess:NO Content:@"Check Username or Password."];
+        return NO;
+    }else{
+        return YES;
+    }
+}
+-(void)showAlertWithSuccess:(BOOL)isSucceed Content:(NSString *)message{
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:isSucceed ? @"Result" : @"Error"
+                                                    message:message
+                                                   delegate:nil
+                                          cancelButtonTitle:@"ok"
+                                          otherButtonTitles:nil, nil];
+    [alert show];
 }
 
 - (void)sendContantFromAddressBook:(NSNotification *)noti{
@@ -57,6 +94,16 @@
     NSLog(@"%@", numberArray);
 }
 
+#pragma mark - UI Action
+- (void)handleSingleTap:(UITapGestureRecognizer *)recognizer {
+    [_numberField resignFirstResponder];
+    [_userNameField resignFirstResponder];
+    [_passwordField resignFirstResponder];
+    [_numberTextView resignFirstResponder];
+    [_contentTextView resignFirstResponder];
+    
+}
+
 - (IBAction)addNumber:(id)sender {
     if (![_numberField.text isEqualToString:@""]) {
         NSString *numberText =  _numberField.text;
@@ -66,8 +113,7 @@
         _numberField.text = @"";
         [numberArray addObject:numberText];
     }else{
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"error" message:@"Enter the Number." delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
-        [alert show];
+        [self showAlertWithSuccess:NO Content:@"Enter the Number."];
     }
     [_numberField resignFirstResponder];
 }
@@ -77,7 +123,6 @@
                                              selector:@selector(sendContantFromAddressBook:)
                                                  name:@"sendContant"
                                                object:nil];
-    
     
     KBContactsSelectionViewController *vc = [KBContactsSelectionViewController contactsSelectionViewControllerWithConfiguration:^(KBContactsSelectionConfiguration *configuration) {
         configuration.mode = KBContactsSelectionModeMessages;
@@ -96,111 +141,28 @@
 
 - (IBAction)queryPoint:(id)sender {
     if ([self checkUserAndPasswd]) {
-        [[Network sharedInstance] queryPointWithUserName:_userNameField.text
-                                                password:_passwordField.text
-                                              completion:^(BOOL succeed, id result, NSError *error) {
-                                                  if (succeed) {
-                                                      NSString *point = [[[[result objectForKey:@"results"] objectForKey:@"result"] lastObject] objectForKey:@"point"];
-                                                      NSLog(@"%@", point);
-                                                      
-                                                      UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Result"
-                                                                                                      message:[NSString stringWithFormat:@"Left Point : %@", point]
-                                                                                                     delegate:nil
-                                                                                            cancelButtonTitle:@"ok"
-                                                                                            otherButtonTitles:nil, nil];
-                                                      [alert show];
-                                                      
-                                                  }else{
-                                                      NSLog(@"%@", error.localizedDescription);
-                                                      UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                                                                      message:error.localizedDescription
-                                                                                                     delegate:nil
-                                                                                            cancelButtonTitle:@"ok"
-                                                                                            otherButtonTitles:nil, nil];
-                                                      [alert show];
-                                                  }
-                                              }];
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        [_mainPageMV QueryPointWithUser:_userNameField.text
+                               password:_passwordField.text];
     }
 }
 
 - (IBAction)sendPress:(id)sender {
-    
-    Network *network = [Network sharedInstance];
     if (numberArray.count == 0 || !numberArray) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"error" message:@"Must have number in List" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
-        [alert show];
+        [self showAlertWithSuccess:NO Content:@"Must have number in List" ];
     }else{
         if (_contentTextView.text.length == 0) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"error" message:@"Must have Message text." delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
-            [alert show];
+            [self showAlertWithSuccess:NO Content:@"Must have Message text."];
         }else{
             [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-            [network sendSMSWithAuthByUser:_userNameField.text Password:_passwordField.text ToNumbers:numberArray Smbody:_contentTextView.text completion:^(BOOL succeed, id result, NSError *error) {
-                if (succeed) {
-                    
-                    LocalModel *localModel = [LocalModel sharedInstance];
-                    NSMutableArray *dataArray = [localModel loadArrayFromLocalPListFile];
-                    NSLog(@"%@", dataArray);
-                    NSMutableDictionary *dataDict = [NSMutableDictionary new];
-                    [dataDict setObject:@1 forKey:@"succeed"];
-                    [dataDict setObject:numberArray forKey:@"SendNumber"];
-                    [dataDict setObject:@{@"user" : _userNameField.text,
-                                          @"passwd" : _passwordField.text}
-                                 forKey:@"user"];
-                    [dataDict setObject:[NSDate date] forKey:@"date"];
-                    [dataDict setObject:[result objectForKey:@"result"] forKey:@"result"];
-                    [dataArray addObject:dataDict];
-                    NSLog(@"%@", dataArray);
-                    
-                    [localModel saveToLocalPlistFile:dataArray];
-                    
-                    NSLog(@"succeed : %@", result);
-                    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Done" message:@"Message Sent to Server Successfully." delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
-                    [alert show];
-                
-                }else{
-                    
-                    LocalModel *localModel = [LocalModel sharedInstance];
-                    NSMutableArray *dataArray = [localModel loadArrayFromLocalPListFile];
-                    NSLog(@"ori array : %@", dataArray);
-                    NSMutableDictionary *dataDict = [NSMutableDictionary new];
-                    [dataDict setObject:@0 forKey:@"succeed"];
-                    [dataDict setObject:numberArray forKey:@"SendNumber"];
-                    [dataDict setObject:@{@"user" : _userNameField.text,
-                                          @"passwd" : _passwordField.text}
-                                 forKey:@"user"];
-                    [dataDict setObject:[NSDate date] forKey:@"date"];
-                    [dataDict setObject:[result objectForKey:@"result"] forKey:@"result"];
-                    [dataArray addObject:dataDict];
-                    NSLog(@"%@", dataArray);
-                    
-                    [localModel saveToLocalPlistFile:dataArray];
-                    
-                    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-                    NSLog(@"error : %@", error.localizedDescription);
-                    NSLog(@"error : %@", result);
-                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                                    message:error.localizedDescription
-                                                                   delegate:nil
-                                                          cancelButtonTitle:@"ok"
-                                                          otherButtonTitles:nil, nil];
-                    
-                    [alert show];
-                }
-            }];
+            [_mainPageMV sendSingleSMSWithUsername:_userNameField.text
+                                          password:_passwordField.text
+                                           numbers:numberArray
+                                           content:_contentTextView.text];
         }
     }
 }
 
-- (BOOL)checkUserAndPasswd{
-    if (_userNameField.text.length == 0 || _passwordField.text.length == 0) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"error" message:@"Check Username or Password." delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
-        [alert show];
-        return NO;
-    }else{
-        return YES;
-    }
-}
+
 
 @end

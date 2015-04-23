@@ -160,10 +160,9 @@ NSString *const kCancelScheduledSMSSSL = @"https://ssl.smsgo.com.tw/sms_gw/sends
               statusCode = [NSString stringWithFormat:@"%@", [[[[responseDict objectForKey:@"results"] objectForKey:@"result"] firstObject] objectForKey:@"statuscode"]];
               
               if (![statusCode isEqualToString:@"0"]) {
-                  NSLog(@"%@", responseDict);
                   NSError *err = [[NSError alloc] initWithDomain:[NSString stringWithFormat:@"%@%@", @"Server Return StatusCode,", statusCode]
                                                             code:[statusCode intValue]
-                                                        userInfo:@{NSLocalizedDescriptionKey : [[[[responseDict objectForKey:@"results"] objectForKey:@"result"] firstObject] objectForKey:@"point"]}];
+                                                        userInfo:@{NSLocalizedDescriptionKey : [[[[responseDict objectForKey:@"results"] objectForKey:@"result"] firstObject] objectForKey:@"statusstr"]}];
                   completion(NO, responseDict, err);
               }else{
                   completion(YES, responseDict, nil);

@@ -88,7 +88,6 @@
                                                            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:error.localizedDescription delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
                                                            
                                                            [alert show];
-                                                           //NSLog(@"%@", error.localizedDescription);
                                                        }
     }];
     
@@ -148,7 +147,6 @@
     cell.textLabel.text = [NSString stringWithFormat:@"Sent to : %@", [[[_dataArray objectAtIndex:indexPath.row] objectForKey:@"SendNumber"] componentsJoinedByString:@","]];
     cell.detailTextLabel.text = [NSString stringWithFormat:@"Date: %@  Success: %@", [df_UTF stringFromDate:date], isSucceed ? @"YES":@"NO" ];
     
-    
     return cell;
 }
 
@@ -198,7 +196,6 @@
                                                                     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:error.localizedDescription delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
                                                                     
                                                                     [alert show];
-                                                                    //NSLog(@"%@", error.localizedDescription);
                                                                 }
                                                             }];
         }

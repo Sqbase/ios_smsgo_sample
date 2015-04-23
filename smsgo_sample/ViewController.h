@@ -11,13 +11,14 @@
 #import <KBContactsSelectionViewController.h>
 #import <MBProgressHUD/MBProgressHUD.h>
 #import "LocalModel.h"
+#import "MainPageMV.h"
 
 
 @interface ViewController : UIViewController <UITextFieldDelegate, UITextViewDelegate>{
     NSMutableArray *numberArray;
 }
 
-//@property (strong, nonatomic)
+@property (strong, nonatomic) MainPageMV *mainPageMV;
 
 - (void)sendContantFromAddressBook:(NSNotification *)noti;
 
